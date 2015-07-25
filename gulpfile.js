@@ -118,6 +118,12 @@ gulp.task('copy', ['less'], function() {
     .src(['./src/main/html/**/*'])
     .pipe(gulp.dest('./dist'))
     .on('error', log);
+
+  // copy all files inside api_versions folder
+  gulp
+    .src(['./api_versions/**/*'])
+    .pipe(gulp.dest('./dist/api_versions'))
+    .on('error', log);
 });
 
 /**

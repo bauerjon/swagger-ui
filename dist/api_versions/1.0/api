@@ -1,0 +1,1 @@
+{"apiVersion":"v2","swaggerVersion":"1.2","produces":["application/json"],"apis":[{"path":"workflows","description":"Operations about workflows"},{"path":"events","description":"Operations about events"},{"path":"debug","description":"Operations about debugs"}],"info":{}}

@@ -1,0 +1,1 @@
+{"apiVersion":"v2","swaggerVersion":"1.2","resourcePath":"/debug","produces":["application/json"],"apis":[{"path":"/v2/debug/error_workflows","operations":[{"notes":"","summary":"Returns all workflows in errored state","nickname":"GET--version-debug-error_workflows","method":"GET","parameters":[],"type":"void"}]}],"basePath":"http://localhost:9292"}

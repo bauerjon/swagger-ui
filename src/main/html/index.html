@@ -23,11 +23,36 @@
 
   <script type="text/javascript">
     $(function () {
+
+      // Start drop down code
+      var available_versions = ["1.0"];
+      var default_version = available_versions[available_versions.length - 1];
+      var options = $("#version-select");
+      var version = window.location.href.match(/version=([^&]+)/)
+
+      if (version && version.length > 1) {
+        version = version[1]
+      } else {
+        version = default_version
+      }
+
+      for (i = 0; i < available_versions.length; i++) {
+        options.append($("<option />").val(available_versions[i]).text(available_versions[i]));
+      }
+
+      $("#version-select").val(version.replace("/", ""));
+
+      $("#version-select").change(function() {
+        new_url = "http://" + window.location.host + "?version=" + this.value
+        window.location.href = new_url
+      });
+      // End drop down code
+
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "https://s3-us-west-2.amazonaws.com/backbeatdocumentation/api_versions/3.0/api";
+        url = "http://" + window.location.host + "/api_versions/"+ version +"/api";
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
@@ -51,9 +76,10 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
-        docExpansion: "list",
+        docExpansion: "full",
         apisSorter: "alpha",
-        showRequestHeaders: false
+        showRequestHeaders: false,
+        validatorUrl: null
       });
 
       function addApiKeyAuthorization(){
@@ -90,7 +116,10 @@
     <a id="logo">backbeat</a>
   </div>
 </div>
-
+<div id="version-select-wrap">
+  <h2>Version</h2>
+  <select id="version-select"></select>
+</div>
 <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </body>
